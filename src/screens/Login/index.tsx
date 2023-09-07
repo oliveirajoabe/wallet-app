@@ -22,7 +22,8 @@ export default function Login() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) => console.log('TESTE', data);
+  const onSubmit = (data) =>
+    console.log('Fazer request para autenticar e guardar o token', data);
 
   return (
     <S.Container>
