@@ -27,27 +27,23 @@ export default function Login() {
   return (
     <S.Container>
       <S.WrapperEmail>
-        <S.CustomText>
-          <S.TextRequired>*</S.TextRequired>
-          E-mail:
-        </S.CustomText>
         <Input
+          textLabel="E-mail:"
           name="email"
           inputMode="email"
           control={control}
           textError={errors.email?.message}
+          required
         />
       </S.WrapperEmail>
       <View>
-        <S.CustomText>
-          <S.TextRequired>*</S.TextRequired>
-          Senha:
-        </S.CustomText>
         <Input
+          textLabel="Senha:"
           name="password"
-          secureTextEntry
           control={control}
           textError={errors.password?.message}
+          secureTextEntry
+          required
         />
       </View>
       <View>

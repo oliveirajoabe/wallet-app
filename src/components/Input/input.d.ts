@@ -7,4 +7,6 @@ interface InputProps {
   control: Record<unknown>;
   name: string;
   textError?: string;
+  required?: boolean;
+  textLabel?: string;
 }

@@ -10,20 +10,6 @@ export const Container = styled.View`
   `}
 `;
 
-export const TextRequired = styled.Text`
-  ${({ theme }) => css`
-    color: ${theme.colors.error};
-    font-weight: bold;
-  `}
-`;
-
-export const CustomText = styled.Text`
-  ${({ theme }) => css`
-    color: ${theme.colors.white};
-    margin-bottom: 5px;
-  `}
-`;
-
 export const ButtonLink = styled.TouchableOpacity`
   padding: 8px 0;
 `;

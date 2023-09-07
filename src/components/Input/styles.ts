@@ -20,3 +20,23 @@ export const TextError = styled.Text`
     color: ${theme.colors.error};
   `}
 `;
+
+export const CustomText = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+    margin-bottom: 5px;
+  `}
+`;
+
+export const TextRequired = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.colors.error};
+    font-weight: bold;
+  `}
+`;
+
+export const WrapperIcon = styled.View`
+  position: absolute;
+  top: 10%;
+  right: 2%;
+`;
