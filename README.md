@@ -1,7 +1,7 @@
 #### to-do:
 
 [x] criar tela de login <br/> [ ] estudar o uso de axios + react query e
-implementa-los<br/> [ ] estudar e implementar redux <br/> [ ] adicionar e
+implementa-los<br/> [x] estudar e implementar redux <br/> [ ] adicionar e
 configurar rotas | privadas e publicas <br/> [ ] implementar melhorias nas
 configurações do linter | dicas de dependencias nos hooks de react<br/> [ ]
 melhorar o theme do projeto | adicionar fontes, pesos, tamanhos e etc <br/> [ ]

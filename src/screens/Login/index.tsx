@@ -6,15 +6,18 @@ import { View } from 'react-native';
 import Input from '../../components/Input';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { fetchLogin } from '../../store/reducers/login/actions';
+
+import schema from './validate';
 
 export default function Login() {
-  const schema = yup
-    .object({
-      email: yup.string().required('Campo de e-mail obrigatorio'),
-      password: yup.string().required('Campo de senha obrigatorio'),
-    })
-    .required('Insira valores em todos os campos');
+  const dispatch = useDispatch();
+  const { loginReducer } = useAppSelector((state) => state);
+
+  console.log(loginReducer);
 
   const {
     control,
@@ -22,8 +25,15 @@ export default function Login() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) =>
+  const onSubmit = (data: DataRequest) => {
+    // email: 'testejoabe@email.com', password: 'batata0800'
+    try {
+      dispatch(fetchLogin({ ...data }));
+    } catch (error) {
+      console.error('login error: ', error);
+    }
     console.log('Fazer request para autenticar e guardar o token', data);
+  };
 
   return (
     <S.Container>
@@ -33,7 +43,7 @@ export default function Login() {
           name="email"
           inputMode="email"
           control={control}
-          textError={errors.email?.message}
+          textError={errors.email?.message || loginReducer.login.data?.message}
           required
         />
       </S.WrapperEmail>
@@ -42,11 +52,14 @@ export default function Login() {
           textLabel="Senha:"
           name="password"
           control={control}
-          textError={errors.password?.message}
+          textError={
+            errors.password?.message || loginReducer.login.data?.message
+          }
           secureTextEntry
           required
         />
       </View>
+
       <View>
         <S.ButtonLink>
           <S.CustomTextLink>Esqueci a senha</S.CustomTextLink>
