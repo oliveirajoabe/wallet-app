@@ -17,8 +17,6 @@ export default function Login() {
   const dispatch = useDispatch();
   const { loginReducer } = useAppSelector((state) => state);
 
-  console.log(loginReducer);
-
   const {
     control,
     handleSubmit,
@@ -26,13 +24,11 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data: DataRequest) => {
-    // email: 'testejoabe@email.com', password: 'batata0800'
     try {
       dispatch(fetchLogin({ ...data }));
     } catch (error) {
       console.error('login error: ', error);
     }
-    console.log('Fazer request para autenticar e guardar o token', data);
   };
 
   return (
