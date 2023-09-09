@@ -1,7 +1,20 @@
-export default (store) => {
+import { Action } from 'redux';
+
+interface ActionInterface extends Action {
+  values?: any;
+  titleSuccessFeedBack?: string;
+  successFeedbackMsg?: string;
+  errorFeedbackMsg?: string;
+  payload?: any;
+  onSuccess?: (value?: any) => void;
+  onError?: (value?: any) => void;
+  getErrorFeedbackMsg?: (value?: any) => void;
+}
+
+export default (store: any) => {
   const { dispatch } = store;
 
-  const getReducerValidKeys = (action) => {
+  const getReducerValidKeys = (action: ActionInterface) => {
     const copyAction = { ...action };
 
     const listNotValidKeys = [
@@ -17,7 +30,7 @@ export default (store) => {
     return copyAction;
   };
 
-  const showLoading = (action, isPromise) => {
+  const showLoading = (action: ActionInterface, isPromise: boolean) => {
     const suffixes = ['_PENDING', '_FULFILLED', '_REJECTED'];
 
     const shouldShowLoading = suffixes.reduce((bool, el) => {
@@ -36,14 +49,10 @@ export default (store) => {
     }
   };
 
-  const handleSuccess = (resp, action) => {
+  const handleSuccess = (resp: any, action: ActionInterface) => {
     const reducerValidKeys = getReducerValidKeys(action);
 
-    const {
-      onSuccess,
-      titleSuccessFeedBack = 'Sucesso!',
-      successFeedbackMsg,
-    } = action;
+    const { onSuccess } = action;
 
     dispatch({
       ...reducerValidKeys,
@@ -57,9 +66,8 @@ export default (store) => {
     }
   };
 
-  const handleError = (error, action) => {
-    const { onError, getErrorFeedbackMsg, errorFeedbackMsg, hideError } =
-      action;
+  const handleError = (error: any, action: ActionInterface) => {
+    const { onError, getErrorFeedbackMsg, errorFeedbackMsg } = action;
     console.log(error);
     const defaultMessage =
       'Algo de errado aconteceu. Tente novamente mais tarde.';
@@ -85,7 +93,7 @@ export default (store) => {
     }
   };
 
-  return (next) => (action) => {
+  return (next: (value: any) => void) => (action: ActionInterface) => {
     const promise = action.payload;
     const isPromise = promise && promise.then;
 

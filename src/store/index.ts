@@ -6,12 +6,7 @@ import reduxPromiseMiddleware from '../middlewares/redux-promise-middleware';
 
 const middlewares = [reduxPromiseMiddleware].filter(Boolean);
 
-const finalCreateStore = compose(
-  applyMiddleware(...middlewares),
-  window.__REDUX_DEVTOOLS_EXTENSION__
-    ? window.__REDUX_DEVTOOLS_EXTENSION__()
-    : (f) => f,
-);
+const finalCreateStore = compose(applyMiddleware(...middlewares));
 
 const store = createStore(persistedReducer(rootReducer), finalCreateStore);
 
