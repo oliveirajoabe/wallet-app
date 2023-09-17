@@ -1,7 +1,7 @@
 import { produce } from 'immer';
 import { Action } from 'redux';
 
-import { login } from './reducerCases';
+import reducers from './reducerCases';
 
 import initialState from './initialState';
 
@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 };
 
 const reducerCases = {
-  ...login,
+  ...reducers,
 };
 
 const loginReducer = (state = INITIAL_STATE, action: Action) =>
