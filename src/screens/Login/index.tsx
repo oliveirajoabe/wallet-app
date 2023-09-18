@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import * as S from './styles';
 import Button from '../../components/Button';
@@ -12,12 +12,27 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchLogin } from '../../store/reducers/login/actions';
 
 import schema from './validate';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+
+import { NavigationProp } from '@react-navigation/native';
+
+type Navigation = NavigationProp<RootRoutes, 'menuListTab'>;
 
 export default function Login() {
   const dispatch = useDispatch();
-  const { loginReducer } = useAppSelector((state) => state);
+  const { login } = useAppSelector(({ loginReducer }) => loginReducer);
+  const navigation = useNavigation<Navigation>();
 
-  console.log(loginReducer);
+  const getAllKeys = async () => {
+    console.log('CHAVE NO LOCAL', await AsyncStorage.getAllKeys());
+    console.log('ITEMS DO LOCAL', await AsyncStorage.getItem('persist:wallet'));
+    console.log('LOGIN', login);
+  };
+
+  const handleRedirectLoggedSuccess = useCallback(() => {
+    navigation.navigate('menuListTab');
+  }, []);
 
   const {
     control,
@@ -26,13 +41,11 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data: DataRequest) => {
-    // email: 'testejoabe@email.com', password: 'batata0800'
     try {
-      dispatch(fetchLogin({ ...data }));
+      dispatch(fetchLogin({ ...data, onSuccess: handleRedirectLoggedSuccess }));
     } catch (error) {
       console.error('login error: ', error);
     }
-    console.log('Fazer request para autenticar e guardar o token', data);
   };
 
   return (
@@ -43,7 +56,7 @@ export default function Login() {
           name="email"
           inputMode="email"
           control={control}
-          textError={errors.email?.message || loginReducer.login.data?.message}
+          textError={errors.email?.message || login.data?.message}
           required
         />
       </S.WrapperEmail>
@@ -52,9 +65,7 @@ export default function Login() {
           textLabel="Senha:"
           name="password"
           control={control}
-          textError={
-            errors.password?.message || loginReducer.login.data?.message
-          }
+          textError={errors.password?.message || login.data?.message}
           secureTextEntry
           required
         />
@@ -71,7 +82,7 @@ export default function Login() {
 
       <S.WrapperButton>
         <Button
-          titleButton="Entrar"
+          titleButton={login.loading ? 'Carregando' : 'Entrar'}
           template="success"
           onPress={handleSubmit(onSubmit)}
         />
