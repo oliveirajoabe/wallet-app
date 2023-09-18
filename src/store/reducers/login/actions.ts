@@ -7,7 +7,11 @@ export const fetchLogin = ({ email, password, onSuccess }: FetchLogin) => ({
   onSuccess,
 });
 
-export const fetchLogout = ({ userId, accessToken, onSuccess }) => ({
+export const fetchLogout = ({
+  userId,
+  accessToken,
+  onSuccess,
+}: FetchLogout) => ({
   type: types.logoutPatch,
   payload: logout({ userId, accessToken }),
   onSuccess,

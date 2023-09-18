@@ -3,3 +3,9 @@ interface FetchLogin {
   password: string;
   onSuccess?: () => void;
 }
+
+interface FetchLogout {
+  userId: string | undefined;
+  accessToken: string | undefined;
+  onSuccess?: () => void;
+}

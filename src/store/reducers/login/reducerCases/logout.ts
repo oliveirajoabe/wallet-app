@@ -11,8 +11,6 @@ export const logout = {
     draft.login.loading = true;
   },
   [index.fulfilled]: ({ draft, action }) => {
-    console.log('ENTROU AQUI');
-
     draft.login.data = null;
 
     draft.login.loading = false;

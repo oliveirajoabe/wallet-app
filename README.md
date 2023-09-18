@@ -1,11 +1,11 @@
 #### to-do:
 
-[x] criar tela de login <br/> [x] estudar e implementar redux <br/> [ ]
-adicionar e configurar rotas | privadas e publicas <br/> [ ] estudar o uso de
-axios + react query e implementa-los<br/> [ ] implementar melhorias nas
-configurações do linter | dicas de dependencias nos hooks de react<br/> [ ]
-melhorar o theme do projeto | adicionar fontes, pesos, tamanhos e etc <br/> [ ]
-estudar algum design pattern e implementar <br/>
+[x] criar tela de login <br/> [x] estudar e implementar redux <br/> [x]
+adicionar e configurar rotas | privadas e publicas <br/> [ ] configurar axios no
+projeto<br/> [ ] implementar melhorias nas configurações do linter | dicas de
+dependencias nos hooks de react<br/> [ ] melhorar o theme do projeto | adicionar
+fontes, pesos, tamanhos e etc <br/> [ ] estudar algum design pattern e
+implementar <br/>
 
 #### Como rodar o projeto:
 
